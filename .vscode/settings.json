@@ -1,0 +1,14 @@
+{
+    "saveAndRun": {
+        "commands": [
+            {
+                "cmd": "cd example; .\\build.ps1; cd ..",
+                "match": "\\.markdown$|\\.ps1$|\\.tex$|\\.sh$|\\.bib$|\\.cls"
+            },
+            {
+                "cmd": "cd docker-pandocian; .\\dockerbuild.ps1; cd ..",
+                "match": "Dockerfile"
+            }
+        ]
+    }
+}

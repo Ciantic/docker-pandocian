@@ -1,0 +1,205 @@
+% Template esimerkki: https://pandoc.org/demo/mytemplate.tex
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\documentclass[a4paper,12pt,utf8]{report}
+
+\usepackage{lmodern}
+\usepackage{relsize,etoolbox} % Suhteelliset fonttikoot, ja beginenvironment
+% \usepackage{fixltx2e}
+% \usepackage{ifthen}
+% \usepackage{chngcntr} % Countereiden tyhjentämistä varten
+% \usepackage{everyshi}[1994/12/09]
+\usepackage{fancyhdr} % Headerin ja footerin säätö (mm. sivunumeron sijainti)
+\usepackage[utf8]{inputenc} % Sisältösi enkoodaus
+\usepackage[T1]{fontenc} % Fontin enkoodaus (ei syötteen)
+\usepackage[
+    xetex,
+    left=3cm,
+    right=3cm,
+    top=2cm,
+    bottom=2.35cm,
+    nohead,
+    headheight=3em, % as per the warning by fancyhdr
+    includehead,
+    includefoot,
+    heightrounded
+]{geometry}
+\usepackage[finnish,english]{babel} % Ota molemmat kielet, vaihda sisällössä \selectlanguage
+\usepackage{courier} % koodifontti
+% \usepackage[authordate,backend=biber,sortlocale=fi,noibid]{biblatex-chicago} % lainaus tyylit
+\usepackage[backend=biber,sortlocale=fi,style=authoryear]{biblatex} % lainaus tyylit
+\usepackage{graphicx} % kuvien mukaan ottamista varten
+\usepackage{amsmath} % hyödyllinen jos tekstisi sisältää matikkaa, ei pakollinen
+\usepackage{booktabs} % hyvä kauniiden taulukoiden tekemiseen
+\usepackage{titlesec} % Tarvitaan otsikon säätöihin \titlespacing jne.
+\usepackage[titles]{tocloft} % Tarvitaan sisällysluettelon säätöihin \cftchapfont
+\usepackage[final]{microtype} % Kytkee jotain mikrotason säätöjä fontteihin
+\usepackage{tikzpagenodes} % absoluuttiseen logon asetteluun
+
+\emergencystretch=1em % lisää toleranssia tavutukseen
+
+% PÄÄFONTTI
+% \usepackage{mathptmx} % Times 
+\usepackage{mathpazo} % joku Palatino kopio
+
+% HUOM! Tämän tulee olla viimeinen \usepackage koko dokumentissa!
+\usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
+
+% Lähdeluettelon nimikkeet
+\DefineBibliographyStrings{finnish}{%
+  bibliography={Lähteet},%
+  andothers={ym\adddot}%
+}
+
+% sivunumerointi muuten vain
+\fancyhf{} % tyhjennä header ja footer
+\fancyhead[C]{
+    \raisebox{1.4em}{ % nosta sivunumeroa ylöspäin
+        \thepage
+    }
+}
+\pagestyle{fancy}
+
+% sivunumerointi päälukujen sivulla (header ja footer)
+\renewcommand{\headrulewidth}{0pt} % ei alleviivausta headerissa 
+\fancypagestyle{plain}{%
+    \fancyhf{} % tyhjennä header ja footer
+    \fancyhead[C]{
+        \raisebox{1.4em}{ % nosta sivunumeroa ylöspäin
+            \thepage
+        }
+    } % except the center
+}
+
+% Lainaus
+\AtBeginEnvironment{quote}{\smaller}% pienempi fontti
+% \renewcommand{\thequote}{\thequote test}
+
+% Sisällysluettelon ryhdistys
+\renewcommand{\contentsname}{Table of contents}
+\renewcommand{\cftchapfont}{\normalfont\MakeUppercase}% titles in bold
+\renewcommand{\cftchappagefont}{\normalfont}% page numbers in bold
+\renewcommand{\cftdotsep}{0} % lisää pisteitä
+\setlength{\cftbeforechapskip}{9pt} % välitykset ennen lukuja
+% \renewcommand\cftchapafterpnum{\vskip9pt} % lukujen jälkeen tuleva väli
+\renewcommand{\cftchapleader}{\cftdotfill{\cftsecdotsep}}% dot leaders in bold
+\addto\captionsfinnish{% sisällysluettelon otsikko
+  \renewcommand{\contentsname}% sisällysluettelon otsikko
+    {Sisällys}% sisällysluettelon otsikko
+}
+
+% Kappaleet
+\setlength\parindent{1cm} % Sisennys
+\setlength\parskip{0pt} % Väli
+
+% RIVIVÄLI
+\renewcommand{\baselinestretch}{1.0}  
+
+% 1. LUVUT 
+\titleformat{\chapter}
+  {\normalfont\fontsize{16}{20}\bfseries\raggedright}
+  {\thechapter}
+  {0.8em} % Otsikkotekstin irrotus numerosta
+  {\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{0.7em}{2.2em} % VÄLI LUVUN JÄLKEEN 2em
+
+% 1.2 LUVUT
+\titleformat{\section}
+  {\normalfont\fontsize{16}{16}\bfseries\raggedright}
+  {\thesection}
+  {0.6em} % Otsikkotekstin irrotus numerosta
+  {}
+\titlespacing*{\section}{0pt}{2em}{2em} % VÄLI LUVUN JÄLKEEN 2em
+
+% 1.2.3 LUVUT
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries\raggedright}
+  {\thesubsection}
+  {0.4em} % Otsikkotekstin irrotus numerosta
+  {}
+\titlespacing*{\subsection}{0pt}{1.7em}{1.7em} % VÄLI LUVUN JÄLKEEN 2em,
+
+\addbibresource{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+\begin{document}
+\selectlanguage{finnish}
+
+\title{$title$}
+
+$if(author)$
+$for(author)$
+\author{$author$}$sep$
+$endfor$
+$endif$
+
+\begin{titlepage}%
+
+\begin{center}%
+\vspace*{191pt} \ \\
+$if(author)$
+$for(author)$
+$author$$sep$
+$endfor$
+$endif$
+\\
+\end{center}
+\begin{center}
+    \bfseries
+    \fontsize{16}{20}
+    \selectfont
+    \uppercase{
+        $title$
+    }
+    \\
+\end{center}
+
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south)}]
+\node[anchor=south,xshift=0cm,yshift=3.27cm]{   
+    HANKI LOGO TÄHÄN
+    % \includegraphics[bb=0 0 7cm 4.5cm]{resources/jyu-ttkl-logo-2018-7cm-x-4.5cm.pdf}
+};
+\end{tikzpicture}
+
+\clearpage
+\end{titlepage}%
+
+\chapter*{Tiivistelmä}
+\addcontentsline{toc}{chapter}{Tiivistelmä}  
+$author2$ \\
+$title$ \\
+$where$ \\
+$work$ \\
+$examiner$ \\
+\\
+\noindent
+$abstract$
+\\
+\\
+\noindent
+Avainsanat: $keywords$
+\thispagestyle{empty} % poista sivunumero
+\clearpage
+
+
+
+\tableofcontents
+\thispagestyle{empty} % poista sivunumero
+
+$body$
+
+\chapter{Lähteet}
+
+% Lähdeluettelon välistys pois
+% \setboolean{SetDSpace}{false}
+\emergencystretch=4em % lisää toleranssia tavutukseen
+\printbibliography[heading=none]
+% \setboolean{SetDSpace}{true}
+
+\appendix
+$if(include-after)$
+$for(include-after)$
+$include-after$
+$endfor$
+
+$endif$
+
+\end{document}
