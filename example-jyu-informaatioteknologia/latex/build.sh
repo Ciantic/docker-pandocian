@@ -78,7 +78,7 @@ echo "${Cyan}Compiling LaTeX to PDF with LaTeXmk...${Color_Off}"
 
 cd output-latex/
 
-latexmk -f -xelatex index.tex
+latexmk -xelatex -interaction=nonstopmode -halt-on-error index.tex
 
 cd ..
 

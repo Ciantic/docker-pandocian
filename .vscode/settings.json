@@ -2,7 +2,7 @@
     "saveAndRun": {
         "commands": [
             {
-                "cmd": "cd example; .\\build.ps1; cd ..",
+                "cmd": "cd example-jyu-informaatioteknologia; .\\build.ps1; cd ..",
                 "match": "\\.markdown$|\\.ps1$|\\.tex$|\\.sh$|\\.bib$|\\.cls"
             },
             {
