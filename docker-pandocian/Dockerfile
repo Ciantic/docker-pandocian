@@ -1,4 +1,4 @@
-FROM sumdoc/texlive-2017
+FROM sumdoc/texlive-2018
 
 MAINTAINER Jari Pennanen <ciantic@oksidi.com>
 
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y -o Acquire::Retries=10 --no-install-rec
     python -m pip install --upgrade pip && \
     python -m pip install --upgrade setuptools && \
     mkdir -p /installation/ && \
-    wget https://github.com/jgm/pandoc/releases/download/2.1.1/pandoc-2.1.1-1-amd64.deb \
+    wget https://github.com/jgm/pandoc/releases/download/2.3/pandoc-2.3-1-amd64.deb \
         --no-check-certificate \
         -O /installation/pandoc.deb && \
     dpkg -i /installation/pandoc.deb && \
