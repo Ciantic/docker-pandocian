@@ -1,0 +1,3 @@
+[submodule "example-jyu-tietotekniikka/latex/ttl-gradu"]
+	path = example-jyu-tietotekniikka/latex/ttl-gradu
+	url = git://yousource.it.jyu.fi/latex-thesis-classes/ttl-gradu.git
