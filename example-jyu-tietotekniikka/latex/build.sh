@@ -15,7 +15,7 @@ Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
 
-export TEXINPUTS=$TEXINPUTS:.:../latex:
+export TEXINPUTS=$TEXINPUTS:.:../latex:../latex/ttl-gradu:
 
 # Running inside docker as root
 if [ -z ${USER+x} ]; then
@@ -52,13 +52,13 @@ pandoc \
     -f markdown \
     index.markdown
 
-echo "${Cyan}Creating LaTeX file...${Color_Off}"
+echo "${Cyan}Creating LaTeX file with Pandoc...${Color_Off}"
 pandoc \
     -N \
     --top-level-division=chapter \
     --template=latex/template.tex \
     --filter pandoc-fignos \
-    --pdf-engine=xelatex \
+    --pdf-engine=pdflatex \
     --verbose \
     --biblatex \
     --bibliography=index.bib \
@@ -70,11 +70,12 @@ pandoc \
     # -A appendix2.markdown \
     # -A appendix3.tex \
 
-
 if [ $? -ne 0 ]; then { 
-    echo -e "${Red}Pandoc unable to create LaTeX file, aborting.${Color_Off}" ;
+    echo -e "${Red}Pandoc was unable to create LaTeX file, aborting.${Color_Off}" ;
     exit 1; 
 } fi
+
+echo "${Green}Pandoc finished without errors.${Color_Off}" ;
 
 echo "${Cyan}Compiling LaTeX to PDF with LaTeXmk...${Color_Off}"
 

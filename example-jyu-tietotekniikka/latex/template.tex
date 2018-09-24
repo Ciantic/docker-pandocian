@@ -1,0 +1,77 @@
+%\documentclass[utf8,english]{gradu3}
+% If you are writing a Bachelor's Thesis, use the following instead:
+\documentclass[utf8,bachelor]{gradu3}
+% \usepackage{csquotes}
+
+\usepackage{graphicx} % for including pictures
+
+\usepackage{amsmath} % useful for math (optional)
+
+\usepackage{booktabs} % good for beautiful tables
+
+% NOTE: This must be the last \usepackage in the whole document!
+\usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
+
+\addbibresource{$for(bibliography)$$bibliography$$sep$,$endfor$} % The file name of your bibliography database
+
+\begin{document}
+
+$if(title)$
+\title{$title$}
+$endif$
+
+$if(title_eng)$
+\translatedtitle{$title_eng$}
+$endif$
+
+$if(suuntautumisvaihtoehto)$
+\studyline{$suuntautumisvaihtoehto$}
+$endif$
+
+$if(avainsanat)$
+\avainsanat{$for(avainsanat)$$avainsanat$$sep$,$endfor$}
+$endif$
+
+$if(keywords)$
+\keywords{$for(keywords)$$keywords$$sep$,$endfor$}
+$endif$
+
+$if(tiivistelma)$
+\tiivistelma{$tiivistelma$}
+$endif$
+
+$if(abstract)$
+\abstract{$abstract$}
+$endif$
+
+$if(contact)$
+$for(contact)$
+\contactinformation{$contact$}$sep$
+$endfor$
+$endif$
+
+$if(author)$
+$for(author)$
+\author{$author$}$sep$
+$endfor$
+$endif$
+
+$if(examiner)$
+$for(examiner)$
+\supervisor{$examiner$}
+$endfor$
+$endif$
+
+$if(work)$
+\type{$work$}
+$endif$
+
+\maketitle
+
+\mainmatter
+
+$body$
+
+\printbibliography
+
+\end{document}
