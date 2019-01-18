@@ -83,6 +83,8 @@ cd output-latex/
 
 latexmk -xelatex -interaction=nonstopmode -halt-on-error index.tex
 
+biblatex_check.py -b index.bib -a index.aux -o bib-errors.html
+
 if [ $? -ne 0 ]; then { 
     echo "${Red}LaTeXmk was unable to create PDF file, aborting.${Color_Off}" ;
     cd ..
